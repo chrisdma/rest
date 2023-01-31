@@ -2,10 +2,10 @@ import { Router } from 'express';
 const router = Router();
 
 router.get('/routinematch', (req, res) => {
-  const validProperties = ["class1", "class2", "class3", "routinename"]
+  const validProperties = ["class1", "class2", "class3", "routineName"]
   const validRequest = validProperties.every(prop => req.query.hasOwnProperty(prop));
   if (validRequest){
-    const routineName = req.query.routinename.toUpperCase().replace(/\s+/g, '')
+    const routineName = req.query.routineName.toUpperCase().replace(/\s+/g, '')
     const obj = {
       class1: (req.query.class1 === "true"),
       class2: (req.query.class2 === "true"),
