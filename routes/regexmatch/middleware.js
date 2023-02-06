@@ -20,6 +20,7 @@ router.get(
       class3: req.query.class3 === "true",
     };
 
+    res.set('Access-Control-Allow-Origin', '*');
     if (obj[determineClass(routineName)]) {
       res.status(200).json({ response: true });
     } else {
@@ -59,6 +60,8 @@ router.post(
       class2: req.body.class2 === true,
       class3: req.body.class3 === true,
     };
+
+    res.set('Access-Control-Allow-Origin', '*');
     if (obj[determineClass(routineName)]) {
       res.status(200).json({ response: true });
     } else {
