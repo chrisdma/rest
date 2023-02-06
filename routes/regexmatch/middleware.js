@@ -55,11 +55,10 @@ router.post(
     }
     const routineName = req.body.routineName.toUpperCase();
     const obj = {
-      class1: req.body.class1 === "true",
-      class2: req.body.class2 === "true",
-      class3: req.body.class3 === "true",
+      class1: req.body.class1 === true,
+      class2: req.body.class2 === true,
+      class3: req.body.class3 === true,
     };
-
     if (obj[determineClass(routineName)]) {
       res.status(200).json({ response: true });
     } else {
