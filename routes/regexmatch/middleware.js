@@ -9,6 +9,7 @@ router.get(
   query("class3").isBoolean(),
   query("routineName").trim().escape().isLength({ min: 2, max: 12 }),
   (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -20,7 +21,6 @@ router.get(
       class3: req.query.class3 === "true",
     };
 
-    res.set('Access-Control-Allow-Origin', '*');
     if (obj[determineClass(routineName)]) {
       res.status(200).json({ response: true });
     } else {
@@ -50,6 +50,7 @@ router.post(
   body("class3").isBoolean(),
   body("routineName").trim().escape().isLength({ min: 2, max: 12 }),
   (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -61,7 +62,6 @@ router.post(
       class3: req.body.class3 === true,
     };
 
-    res.set('Access-Control-Allow-Origin', '*');
     if (obj[determineClass(routineName)]) {
       res.status(200).json({ response: true });
     } else {
