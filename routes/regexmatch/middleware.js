@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { body, query, validationResult } from "express-validator";
+import {escape, unescape} from 'html-escaper';
 const router = Router();
 
 router.get(
@@ -81,6 +82,24 @@ router.post(
         default:
           return "class1";
       }
+    }
+  }
+);
+router.get(
+  "/stringescape",
+  query("string").trim().escape().isBase64(),
+  (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    try{
+      let escapeString = escape(Buffer.from(req.query.string, "base64").toString());
+      res.status(200).json({ response: escapeString });
+    }
+    catch{
+      return res.status(400).json({ response: "Could not base64Decode() 'string' parameter." });
     }
   }
 );
